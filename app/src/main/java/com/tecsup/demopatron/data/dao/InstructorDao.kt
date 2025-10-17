@@ -13,4 +13,7 @@ interface InstructorDao {
 
     @Query("SELECT * FROM instructor ORDER BY apellido ASC")
     fun getAllInstructors(): Flow<List<Instructor>>
+
+    @Query("DELETE FROM instructor WHERE codigo = :codigo")
+    suspend fun deleteByCodigo(codigo: Int)
 }
