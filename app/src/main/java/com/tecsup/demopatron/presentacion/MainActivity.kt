@@ -34,14 +34,12 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Column(modifier = Modifier.padding(8.dp)) {
 
-                        // 🟩 Formulario para agregar instructores
                         InstructorFormScreen(
                             onSave = { apellido, nombre, horas, pago ->
                                 viewModel.insertInstructor(apellido, nombre, horas, pago)
                             }
                         )
 
-                        // 🟦 Lista de instructores
                         InstructorListScreen(viewModel = viewModel)
                     }
                 }
