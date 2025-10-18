@@ -10,4 +10,10 @@ class InstructorRepository(private val dao: InstructorDao) {
     }
 
     fun getAll(): Flow<List<Instructor>> = dao.getAllInstructors()
+
+    suspend fun deleteByCodigo(codigo: Int) {
+        dao.deleteByCodigo(codigo)
+    }
+
+
 }

@@ -15,8 +15,7 @@ import kotlinx.coroutines.flow.stateIn
 class InstructorViewModel(application: Application): AndroidViewModel(application) {
     private val repository: InstructorRepository
 
-// Estado observable con lista de instructores
-
+    // Estado observable con lista de instructores
     val instructors: StateFlow<List<Instructor>>
 
     init {
@@ -37,6 +36,12 @@ class InstructorViewModel(application: Application): AndroidViewModel(applicatio
         )
         viewModelScope.launch {
             repository.insert(inst)
+        }
+    }
+
+    fun deleteInstructor(codigo: Int) {
+        viewModelScope.launch {
+            repository.deleteByCodigo(codigo)
         }
     }
 }

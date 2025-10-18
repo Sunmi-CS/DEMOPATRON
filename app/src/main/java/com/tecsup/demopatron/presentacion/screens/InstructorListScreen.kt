@@ -3,11 +3,7 @@ package com.tecsup.demopatron.presentacion.screens
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -35,8 +31,10 @@ fun InstructorListScreen(viewModel: InstructorViewModel) {
 
             LazyColumn {
                 items(instructorsState.value) { instructor ->
-                    InstructorRow(instructor)
-                    Divider(modifier = Modifier.padding(vertical = 4.dp))
+                    InstructorRow(instructor, onDelete = {
+                        viewModel.deleteInstructor(instructor.codigo)
+                    })
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
                 }
             }
         }
@@ -44,24 +42,40 @@ fun InstructorListScreen(viewModel: InstructorViewModel) {
 }
 
 @Composable
-fun InstructorRow(instructor: Instructor) {
-    Column(
+fun InstructorRow(
+    instructor: Instructor,
+    onDelete: () -> Unit
+) {
+    Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(8.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(
-            text = "${instructor.apellido}, ${instructor.nombre}",
-            style = MaterialTheme.typography.titleMedium
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = "Horas dictadas: ${instructor.horasDictadas}",
-            style = MaterialTheme.typography.bodyMedium
-        )
-        Text(
-            text = "Pago por hora: S/. ${instructor.pagoPorHora}",
-            style = MaterialTheme.typography.bodyMedium
-        )
+        Column {
+            Text(
+                text = "${instructor.apellido}, ${instructor.nombre}",
+                style = MaterialTheme.typography.titleMedium
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "Horas dictadas: ${instructor.horasDictadas}",
+                style = MaterialTheme.typography.bodyMedium
+            )
+            Text(
+                text = "Pago por hora: S/. ${instructor.pagoPorHora}",
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
+
+        Button(
+            onClick = onDelete,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.errorContainer
+            ),
+            modifier = Modifier.alignByBaseline()
+        ) {
+            Text("Eliminar", color = MaterialTheme.colorScheme.onErrorContainer)
+        }
     }
 }

@@ -34,6 +34,9 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
+room-compiler = { module = "androix.room:room-compiler", version.ref = "roomVersion" }
+room-ktx = { module = "androix.room:room-ktx", version.ref = "roomVersion" }
+room-runtime = { module = "androix.room:room-runtime", version.ref = "roomVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
